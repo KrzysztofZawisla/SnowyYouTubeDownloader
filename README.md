@@ -5,7 +5,7 @@ Used libraries and external apps:
   - pytube https://python-pytube.readthedocs.io/en/latest/
   - ffmpeg https://ffmpeg.org/
 
-[PL]
+[PL]  
 Instalacja:
   - Rozpakuj folder tak aby plik SnowyYouTubeDownloader.exe i ffmpeg.exe znajdowały się w tym samym katalogu
   
