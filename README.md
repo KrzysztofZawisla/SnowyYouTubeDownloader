@@ -11,7 +11,8 @@ Instalacja:
   
 Wykorzystanie:
   - Uruchom konsolę cmd
-  - Napisz SnowyYouTubeDownloader.exe linkDoFilmiku np.: ```SnowyYouTubeDownloader.exe https://www.youtube.com/watch?v=RbjkSNHyX0s```
+  - Napisz SnowyYouTubeDownloader.exe linkDoFilmiku  
+  np.: ```SnowyYouTubeDownloader.exe https://www.youtube.com/watch?v=RbjkSNHyX0s```
   - Poczekaj aż program zakończy pracę
   - Znajdź swój plik w folderze pobrane lub w folderze w którym masz aplikację jeżeli dojdzie do jakieś kolizji podczas pracy aplikacji
   
