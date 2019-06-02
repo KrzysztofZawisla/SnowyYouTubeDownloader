@@ -10,7 +10,6 @@ with OpenKey(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explo
         key, '{374DE290-123F-4565-9164-39C4925E467B}')[0]
 
 def downloadFromYt():
-    searchDone = False
     try:
         ytTitle = YouTube(str(sys.argv[1])).title
         yt = YouTube(str(sys.argv[1]))
@@ -46,7 +45,6 @@ def downloadFromYt():
                     continue
             bandwitchI -= 1
 
-        print(ytVideoName+" . "+ytAudioName)
         cmdCommand = "ffmpeg.exe -i \""+ytVideoName+"\" -i \""+ytAudioName+"\" -y videoOutput.mp4"
         proc = subprocess.Popen(cmdCommand, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         proc.wait()
