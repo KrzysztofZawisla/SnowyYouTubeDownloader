@@ -16,90 +16,38 @@ def downloadFromYt():
         ytTitle = YouTube(str(sys.argv[1])).title
         yt = YouTube(str(sys.argv[1]))
         ytObjects = yt.streams.all()
-        if searchDone == False:
+        resolutionI = 10000
+        while resolutionI > 0:
             for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"2160p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"1440p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(
-                        filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"1080p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"720p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"480p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"360p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"240p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
-
-        if searchDone == False:
-            for ytObjectVideoInt in range(len(ytObjects)):
-                if ("res=\"144p\"" in str(ytObjects[ytObjectVideoInt])) and ("mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt])):
-                    print(ytObjects[ytObjectVideoInt])
-                    ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
-                    ytVideoName = "videoToProcess.mp4"
-                    searchDone = True
-                    break
+                try:
+                    if "res=\""+str(resolutionI)+"p\"" in str(ytObjects[ytObjectVideoInt]):
+                        print(ytObjects[ytObjectVideoInt])
+                        ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
+                        if "mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt]):
+                            ytVideoName = "videoToProcess"+str(nameInt)".mp4"
+                        elif "mime_type=\"video/webm\"" in str(ytObjects[ytObjectVideoInt]):
+                            ytVideoName = "videoToProcess.webm"
+                        resolutionI = 0
+                        break
+                except:
+                    continue
+            resolutionI -= 1
 
         bandwitchI = 1000
         while bandwitchI > 0:
             for ytObjectAudioInt in range(len(ytObjects)):
-                if ("abr=\""+str(bandwitchI)+"kbps\"" in str(ytObjects[ytObjectAudioInt])) and ("mime_type=\"audio/webm\"" in str(ytObjects[ytObjectAudioInt])):
-                    print(ytObjects[ytObjectAudioInt])
-                    ytObjects[ytObjectAudioInt].download(filename="audioToProcess")
-                    ytAudioName = "audioToProcess.webm"
-                    bandwitchI = 0
-                    break
+                try:
+                    if ("abr=\""+str(bandwitchI)+"kbps\"" in str(ytObjects[ytObjectAudioInt])) and ("mime_type=\"audio/webm\"" in str(ytObjects[ytObjectAudioInt])):
+                        print(ytObjects[ytObjectAudioInt])
+                        ytObjects[ytObjectAudioInt].download(filename="audioToProcess")
+                        ytAudioName = "audioToProcess.webm"
+                        bandwitchI = 0
+                        break
+                except:
+                    continue
             bandwitchI -= 1
 
+        print(ytVideoName+" . "+ytAudioName)
         cmdCommand = "ffmpeg.exe -i \""+ytVideoName+"\" -i \""+ytAudioName+"\" -y videoOutput.mp4"
         proc = subprocess.Popen(cmdCommand, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         proc.wait()
