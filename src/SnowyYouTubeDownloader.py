@@ -23,7 +23,7 @@ def downloadFromYt():
                         print(ytObjects[ytObjectVideoInt])
                         ytObjects[ytObjectVideoInt].download(filename="videoToProcess")
                         if "mime_type=\"video/mp4\"" in str(ytObjects[ytObjectVideoInt]):
-                            ytVideoName = "videoToProcess"+str(nameInt)".mp4"
+                            ytVideoName = "videoToProcess.mp4"
                         elif "mime_type=\"video/webm\"" in str(ytObjects[ytObjectVideoInt]):
                             ytVideoName = "videoToProcess.webm"
                         resolutionI = 0
