@@ -4,7 +4,6 @@ import sys
 import subprocess
 import os
 import shutil
-import time
 
 with OpenKey(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders') as key:
     downloadsFolder = QueryValueEx(
